@@ -1,14 +1,13 @@
 {
   "name": "gulp-template",
-  "varsion": "0.1.1",
+  "varsion": "0.2.0",
   "devDependencies": {
     "gulp": "latest",
     "gulp-concat": "latest",
+    "gulp-connect": "latest",
     "gulp-imagemin": "latest",
-    "gulp-livereload": "latest",
+    "gulp-minify-css": "latest",
     "gulp-stylus": "latest",
-    "gulp-uglify": "latest",
-    "tiny-lr": "latest",
-    "gulp-connect": "latest"
+    "gulp-uglify": "latest"
   }
 }
