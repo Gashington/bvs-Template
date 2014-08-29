@@ -9,7 +9,11 @@ var gulp = require('gulp'),
 
 // Задачи выполняемые при старте.
 gulp.task('default', function () {
-    gulp.start('dev-server','stylus', 'watch'); // запуск сервера, компиляция stylus, запуск наблюдателей.
+    gulp.start([
+        'dev-server',
+        'stylus',
+        'watch'
+    ]);
 });
 
 // запуск сервера
@@ -33,27 +37,23 @@ gulp.task('watch', function () {
 
     // перезагрузка страницы при изменении и добавлении *.html
     gulp.task('html', function () {
-        console.log(true)
         gulp.src('dest/*.html')
-            .pipe(connect.reload());
+            //.pipe(connect.reload());
     });
 
     // перезагрузка страницы при изменении и добавлении изображений
     gulp.task('img', function () {
-        //console.log(true)
         gulp.src('./source/img/**/*.{png,jpg,gif}')
-            .pipe(connect.reload());
+            //.pipe(connect.reload());
     });
     // перезагрузка страницы при изменении и добавлении изображений
     gulp.task('css', function () {
-        //console.log(true)
         gulp.src('./source/css/**/*.css')
-            .pipe(connect.reload());
+            //.pipe(connect.reload());
     });
 
     // перезагрузка страницы при изменении и добавлении .*js
     gulp.task('js', function () {
-        //console.log(true)
         gulp.src('./source/js/**/*.js')
             .pipe(connect.reload());
     });
