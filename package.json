@@ -8,6 +8,7 @@
     "gulp-imagemin": "latest",
     "gulp-minify-css": "latest",
     "gulp-stylus": "latest",
-    "gulp-uglify": "latest"
+    "gulp-uglify": "latest",
+    "gulp.spritesmith": "latest"
   }
 }

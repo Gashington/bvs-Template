@@ -1,4 +1,4 @@
-#bvsTemplate v.1.1.1
+#bvsTemplate v.1.2.1
 Шаблон для быстрой front-end разработки, на основе gulp.js
 Данный инструмент предназначен для оптимизации рабочего времени front-end разработчика и быстрой сборке оптимизированного проекта.
 ###Инструментарий:
@@ -20,7 +20,7 @@
 ###Установка и запуск
 Для начала работы с новым проектом, необходимо выполнить три простых шага:
 
-1. `git clone git@github.com:jslby/fewatcher.git path/to/your/project`
+1. `git clone git@github.com:Gashington/bvs-Template.git path/to/your/project`
 2. Необходимо перейти в папку со своим проектом в консоли: `cd /path/to/your/project`
 2. Установка всех зависимостей: `npm install`
 3. запуск проекта: `gulp`

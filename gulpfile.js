@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     connect = require ('gulp-connect'),
+    spritesmith  = require('gulp.spritesmith'),
     minifyCSS = require('gulp-minify-css');
 
 
@@ -12,6 +13,7 @@ gulp.task('default', function () {
     gulp.start([
         'dev-server',
         'stylus',
+        'sprite',
         'watch'
     ]);
 });
@@ -30,6 +32,7 @@ gulp.task('dev-server', function(){
 gulp.task('watch', function () {
     gulp.watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], ['reload']); // наблюдение за файлами всеми файлами исключая *.styl
     gulp.watch(['./dev/stylus/**/*.styl'], ['stylus']); // наблюдение за файлами  *.styl
+    gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
 });
 
     // перезагрузка страницы при изменении и добавлении файлов в dev директории
@@ -44,6 +47,25 @@ gulp.task('watch', function () {
         gulp.src(['./dev/stylus/*.styl', '!dev/stylus/mixin/*.styl'])
             .pipe(stylus())
             .pipe(gulp.dest('./dev/css'))
+    });
+
+    // Создание спрайта
+    gulp.task('sprite', function() {
+        var spriteData =
+            gulp.src('./dev/img/sprite/*.*') // путь, откуда берем картинки для спрайта
+                .pipe(spritesmith({
+                    imgName: 'sprite.png',
+                    cssName: 'sprite.styl',
+                    cssFormat: 'stylus',
+                    algorithm: 'binary-tree',
+                    cssTemplate: './dev/stylus/stylus.template.mustache',
+                    cssVarMap: function(sprite) {
+                        sprite.name = 's-' + sprite.name
+                    }
+                }));
+
+        spriteData.img.pipe(gulp.dest('./dev/img/')); // путь, куда сохраняем картинку
+        spriteData.css.pipe(gulp.dest('./dev/stylus/mixin/')); // путь, куда сохраняем стили
     });
 
 // Задача по сборке проекта в папку ./app.
