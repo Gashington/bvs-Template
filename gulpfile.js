@@ -5,7 +5,34 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     connect = require ('gulp-connect'),
     spritesmith  = require('gulp.spritesmith'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    htmlreplace = require('gulp-html-replace'),
+    rename = require("gulp-rename"),
+    jsArr = [
+        '/js/vendor/jquery-1.11.1.js',
+        '/js/vendor/TweenMax.js',
+        '/js/vendor/fancybox.js',
+        '/js/plugins.js',
+        '/js/main.js',
+    ],
+    cssArr = [
+        '/css/normalize.css',
+        '/css/main.css',
+        '/css/widgets.css',
+    ]
+
+// конфигурация html
+gulp.task('htmlconfig', function() {
+    gulp.src('./dev/config.html')
+        .pipe(htmlreplace({
+            'cssConfig': cssArr,
+            'jsConfig': jsArr
+        },{keepBlockTags: true}))
+        .pipe(rename({
+            basename: "index",
+        }))
+        .pipe(gulp.dest('./dev'));
+});
 
 
 // Задачи выполняемые при старте.
@@ -17,6 +44,7 @@ gulp.task('default', function () {
         'watch'
     ]);
 });
+
 
 // запуск сервера
 gulp.task('dev-server', function(){

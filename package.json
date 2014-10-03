@@ -5,8 +5,10 @@
     "gulp": "latest",
     "gulp-concat": "latest",
     "gulp-connect": "latest",
+    "gulp-html-replace": "latest",
     "gulp-imagemin": "latest",
     "gulp-minify-css": "latest",
+    "gulp-rename": "^1.2.0",
     "gulp-stylus": "latest",
     "gulp-uglify": "latest",
     "gulp.spritesmith": "latest"
