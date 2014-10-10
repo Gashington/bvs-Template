@@ -13,19 +13,25 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:cssConfig -->
-    <link rel="stylesheet" href="configure">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/widgets.css">
     <!-- endbuild -->
 
     <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You aкe using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <p>Hello world! This is bvsTemplate build with Gulp.js.</p>
 <!-- build:jsConfig -->
-<script src="configure"></script>
+<script src="/js/vendor/jquery-1.11.1.js"></script>
+<script src="/js/vendor/TweenMax.js"></script>
+<script src="/js/vendor/fancybox.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
 <!-- endbuild -->
 <!--Удалить в production версии-->
 <script src="//localhost:35729/livereload.js"></script>

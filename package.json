@@ -11,6 +11,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-stylus": "latest",
     "gulp-uglify": "latest",
+    "gulp-watch": "latest",
     "gulp.spritesmith": "latest"
   }
 }

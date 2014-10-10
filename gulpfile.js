@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     minifyCSS = require('gulp-minify-css'),
     htmlreplace = require('gulp-html-replace'),
     rename = require("gulp-rename"),
+    watch = require('gulp-watch'),
     jsArr = [
         '/js/vendor/jquery-1.11.1.js',
         '/js/vendor/TweenMax.js',
@@ -21,9 +22,24 @@ var gulp = require('gulp'),
         '/css/widgets.css',
     ]
 
+
+
+
+
+// Задачи выполняемые при старте.
+gulp.task('default', function () {
+    gulp.start([
+        'htmlconfig',
+        'dev-server',
+        'stylus',
+        'sprite',
+        'watch'
+    ]);
+});
+
 // конфигурация html
 gulp.task('htmlconfig', function() {
-    gulp.src('./dev/config.html')
+    gulp.src('./dev/index.html')
         .pipe(htmlreplace({
             'cssConfig': cssArr,
             'jsConfig': jsArr
@@ -33,19 +49,6 @@ gulp.task('htmlconfig', function() {
         }))
         .pipe(gulp.dest('./dev'));
 });
-
-
-// Задачи выполняемые при старте.
-gulp.task('default', function () {
-    gulp.start([
-        'dev-server',
-        'stylus',
-        'sprite',
-        'watch'
-    ]);
-});
-
-
 // запуск сервера
 gulp.task('dev-server', function(){
     connect.server({
@@ -58,9 +61,22 @@ gulp.task('dev-server', function(){
 
 // Включаем наблюдателей в рабочей директории
 gulp.task('watch', function () {
-    gulp.watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], ['reload']); // наблюдение за файлами всеми файлами исключая *.styl
-    gulp.watch(['./dev/stylus/**/*.styl'], ['stylus']); // наблюдение за файлами  *.styl
-    gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
+    //gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
+    watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], function (files, cb) {
+        gulp.start('reload', cb);
+        console.error('done reload')
+    });
+    watch(['./dev/stylus/**/*.styl'], function (files, cb) {
+        gulp.start('stylus', cb);
+        console.error('done')
+    });
+    watch(['./dev/img/sprite/*.*'], function (files, cb) {
+        gulp.start('sprite', cb);
+        console.error('done-sprite')
+    });
+    //gulp.watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], ['reload']); // наблюдение за файлами всеми файлами исключая *.styl
+    //gulp.watch(['./dev/stylus/**/*.styl'], ['stylus']); // наблюдение за файлами  *.styl
+    //gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
 });
 
     // перезагрузка страницы при изменении и добавлении файлов в dev директории
@@ -92,22 +108,36 @@ gulp.task('watch', function () {
                     }
                 }));
 
-        spriteData.img.pipe(gulp.dest('./dev/img/')); // путь, куда сохраняем картинку
+        spriteData.img.pipe(gulp.dest('./dev/img/sprite')); // путь, куда сохраняем спрайт
         spriteData.css.pipe(gulp.dest('./dev/stylus/mixin/')); // путь, куда сохраняем стили
     });
 
 // Задача по сборке проекта в папку ./app.
 gulp.task('build', function () {
     gulp.start([
+        'build-html',
         'build-css',
         'build-js',
         'img-min',
-        'copy-source',
+        //'copy-source',
     ]);
 });
+
+    gulp.task('build-html', function() {
+        gulp.src('./dev/index.html')
+            .pipe(htmlreplace({
+                'cssConfig': 'build.min.css',
+                'jsConfig': 'build.min.js'
+            }))
+            .pipe(rename({
+                basename: "index",
+            }))
+            .pipe(gulp.dest('./app'));
+    });
+
     // сборка js
     gulp.task('build-js', function() {
-        gulp.src(['./dev/js/vendor/*jquery-1.11.1.js', './dev/js/plugins.js', './dev/js/main.js'])
+        gulp.src(jsArr)
             .pipe(concat('build.min.js'))
             .pipe(uglify())
             .pipe(gulp.dest('app/js'));
@@ -115,7 +145,7 @@ gulp.task('build', function () {
 
     // сборка css
     gulp.task('build-css', function() {
-        gulp.src(['./dev/css/vendor/normalize.css', './dev/css/main.css', './dev/css/widgets.css'])
+        gulp.src(cssArr)
             .pipe(concat('build.min.css'))
             .pipe(minifyCSS())
             .pipe(gulp.dest('app/css'));
@@ -129,10 +159,10 @@ gulp.task('build', function () {
     });
 
     // копирование *.html в папку проекта
-    gulp.task('copy-source', function () {
-        gulp.src(['./dev/**/*.*','!./dev/img/**/*.*'], { base: './dev' })
-            .pipe(gulp.dest('./app'))
-    });
+    //gulp.task('copy-source', function () {
+    //    gulp.src(['./dev/**/*.*','!./dev/img/**/*.*'], { base: './dev' })
+    //        .pipe(gulp.dest('./app'))
+    //});
 
 
 
