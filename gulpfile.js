@@ -23,9 +23,6 @@ var gulp = require('gulp'),
     ]
 
 
-
-
-
 // Задачи выполняемые при старте.
 gulp.task('default', function () {
     gulp.start([
@@ -108,7 +105,7 @@ gulp.task('watch', function () {
                     }
                 }));
 
-        spriteData.img.pipe(gulp.dest('./dev/img/sprite')); // путь, куда сохраняем спрайт
+        spriteData.img.pipe(gulp.dest('./dev/img/bg')); // путь, куда сохраняем спрайт
         spriteData.css.pipe(gulp.dest('./dev/stylus/mixin/')); // путь, куда сохраняем стили
     });
 
