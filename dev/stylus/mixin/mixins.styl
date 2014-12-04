@@ -1,0 +1,15 @@
+placeholder($color)
+  &::-webkit-input-placeholder
+  &::-moz-placeholder
+  &:-moz-placeholder
+  &:-ms-input-placeholder
+    color $color !important
+    text-indent 0px
+    transition text-indent 0.3s ease
+    &:focus
+      &::-webkit-input-placeholder
+      ::-moz-placeholder
+      :-moz-placeholder
+      :-ms-input-placeholder
+        text-indent 500px
+        transition text-indent 0.3s ease

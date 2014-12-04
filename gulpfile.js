@@ -18,12 +18,11 @@ var gulp = require('gulp'),
     ],
     cssArr = [
         '/css/normalize.css',
+        '/css/misc.css',
         '/css/main.css',
         '/css/widgets.css',
+        '/css/media.css',
     ]
-
-
-
 
 
 // Задачи выполняемые при старте.
@@ -108,7 +107,7 @@ gulp.task('watch', function () {
                     }
                 }));
 
-        spriteData.img.pipe(gulp.dest('./dev/img/sprite')); // путь, куда сохраняем спрайт
+        spriteData.img.pipe(gulp.dest('./dev/img/bg')); // путь, куда сохраняем спрайт
         spriteData.css.pipe(gulp.dest('./dev/stylus/mixin/')); // путь, куда сохраняем стили
     });
 

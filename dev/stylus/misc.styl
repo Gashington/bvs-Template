@@ -1,0 +1,27 @@
+@import '/mixin/mixins'
+/*Переменные настройки*/
+$footerHeight = 80px
+$placeholderColor = #000
+
+/*Стилизация placeholder*/
+input
+  placeholder(#ffffff)
+/*сброс стилей для списков*/
+.unstyled
+  margin 0
+  padding 0
+  list-style none
+
+ /*Футер к низу страницы*/
+html
+body
+  height 100%
+.wrapper
+  min-height: 100%
+  height auto !important
+  height 100%
+  margin 0 auto -$footerHeight
+.footer-push
+  height $footerHeight
+.footer
+  height $footerHeight
