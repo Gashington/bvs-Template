@@ -1,3 +1,5 @@
+/*Переменные настройки*/
+/*Стилизация placeholder*/
 input::-webkit-input-placeholder,
 input::-moz-placeholder,
 input:-moz-placeholder,
@@ -25,8 +27,26 @@ input:-ms-input-placeholder:focus :-ms-input-placeholder {
   text-indent: 500px;
   transition: text-indent 0.3s ease;
 }
+/*сброс стилей для списков*/
 .unstyled {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+/*Футер к низу страницы*/
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -$footerHeight;
+}
+.footer-push {
+  height: 80px;
+}
+.footer {
+  height: 80px;
 }

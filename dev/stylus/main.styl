@@ -1,2 +1,54 @@
 @import '/mixin/mixins'
 @import '/mixin/sprite'
+
+/*Переменные настройки*/
+headerHeight = auto
+footerHeight = 80px
+placeholderColor = #000
+containerWidth = 980px
+
+webfont('CaviarDreams', 'CaviarDreams-webfont', false, 'normal')
+/*Стилизация placeholder*/
+*
+  box-sizing border-box
+  inline-box-align align-content
+
+/*placeholder*/
+input
+  placeholder(#ffffff)
+
+/*сброс стилей для списков*/
+.unstyled
+  margin 0
+  padding 0
+  list-style none
+/*Скрытие текста*/
+.replace-txt
+  text-hide()
+
+.visible
+  opacity 1
+.invisible
+  opacity 0
+
+.s-icon
+  display block
+  background url("../img/bg/sprite.png") no-repeat
+
+.f-left
+  float left
+.f-right
+  float right
+/*Футер к низу страницы*/
+html
+body
+  height 100%
+.wrapper
+  min-height: 100%
+  height auto !important
+  height 100%
+  margin 0 auto - footerHeight
+.footer-push
+  height footerHeight
+.footer
+  height footerHeight

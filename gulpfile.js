@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     spritesmith  = require('gulp.spritesmith'),
     minifyCSS = require('gulp-minify-css'),
     htmlreplace = require('gulp-html-replace'),
+    nib = require('nib'),
     rename = require("gulp-rename"),
     watch = require('gulp-watch'),
     jsArr = [
@@ -61,16 +62,16 @@ gulp.task('dev-server', function(){
 // Включаем наблюдателей в рабочей директории
 gulp.task('watch', function () {
     //gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
-    watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], function (files, cb) {
-        gulp.start('reload', cb);
+    watch(['./dev/**/*.*'], function (vinly) {
+        gulp.start('reload');
         console.error('done reload')
     });
-    watch(['./dev/stylus/**/*.styl'], function (files, cb) {
-        gulp.start('stylus', cb);
+    watch(['./dev/stylus/**/*.styl'], function (vinly) {
+        gulp.start('stylus');
         console.error('done')
     });
-    watch(['./dev/img/sprite/*.*'], function (files, cb) {
-        gulp.start('sprite', cb);
+    watch(['./dev/img/sprite/*.*'], function (vinly) {
+        gulp.start('sprite');
         console.error('done-sprite')
     });
     //gulp.watch(['./dev/**/*.*','!./dev/stylus/**/*.*'], ['reload']); // наблюдение за файлами всеми файлами исключая *.styl
@@ -88,7 +89,7 @@ gulp.task('watch', function () {
     // компиляция stylus
     gulp.task('stylus', function () {
         gulp.src(['./dev/stylus/*.styl', '!dev/stylus/mixin/*.styl'])
-            .pipe(stylus())
+            .pipe(stylus({use: [nib()]}))
             .pipe(gulp.dest('./dev/css'))
     });
 

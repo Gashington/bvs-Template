@@ -12,6 +12,7 @@
     "gulp-stylus": "latest",
     "gulp-uglify": "latest",
     "gulp-watch": "latest",
-    "gulp.spritesmith": "latest"
+    "gulp.spritesmith": "latest",
+    "nib": "latest"
   }
 }
