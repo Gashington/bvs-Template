@@ -1,0 +1,19 @@
+{
+  "name": "gulp-template",
+  "varsion": "0.2.0",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest",
+    "gulp-imagemin": "2.0.0",
+    "imagemin-pngquant": "4.0.0",
+    "gulp-html-replace": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-rename": "^1.2.0",
+    "gulp-stylus": "latest",
+    "gulp-uglify": "latest",
+    "gulp-watch": "latest",
+    "gulp.spritesmith": "latest",
+    "nib": "latest"
+  }
+}

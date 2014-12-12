@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/css/widgets.css">
     <link rel="stylesheet" href="/css/media.css">
     <!-- endbuild -->
-
+    <link rel="stylesheet" href="/css/ie-fix.css">
     <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
@@ -40,7 +40,9 @@
 <script src="/js/plugins.js"></script>
 <script src="/js/main.js"></script>
 <!-- endbuild -->
+[if lt IE 10]
 <script src="/js/vendor/respond.js"></script>
-
+<script src="/js/vendor/jquery-placeholder.js"></script>
+<![endif]-->
 </body>
 </html>
