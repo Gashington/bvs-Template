@@ -18,7 +18,8 @@ input:-moz-placeholder,
 input:-ms-input-placeholder {
   color: #fff !important;
   text-indent: 0px;
-  transition: text-indent 0.3s ease;
+  -webkit-transition: text-indent 0.3s ease;
+          transition: text-indent 0.3s ease;
 }
 input::-webkit-input-placeholder:focus::-webkit-input-placeholder,
 input::-moz-placeholder:focus::-webkit-input-placeholder,
@@ -37,7 +38,8 @@ input::-moz-placeholder:focus :-ms-input-placeholder,
 input:-moz-placeholder:focus :-ms-input-placeholder,
 input:-ms-input-placeholder:focus :-ms-input-placeholder {
   text-indent: 500px;
-  transition: text-indent 0.3s ease;
+  -webkit-transition: text-indent 0.3s ease;
+          transition: text-indent 0.3s ease;
 }
 /*сброс стилей для списков*/
 .unstyled {

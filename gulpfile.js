@@ -8,47 +8,45 @@ var gulp = require('gulp'),
     spritesmith  = require('gulp.spritesmith'),
     minifyCSS = require('gulp-minify-css'),
     htmlreplace = require('gulp-html-replace'),
-    autoprefixer = require('gulp-autoprefixer')
+    autoprefixer = require('gulp-autoprefixer'),
+    jade = require('gulp-jade'),
     rename = require("gulp-rename"),
     watch = require('gulp-watch'),
     jsArr = [
         '/js/vendor/jquery-1.11.1.js',
         '/js/vendor/fancybox.js',
-        '/js/vendor/fancybox.js',
         '/js/plugins.js',
-        '/js/main.js',
+        '/js/main.js'
     ],
     cssArr = [
         '/css/normalize.css',
-        '/css/misc.css',
         '/css/main.css',
         '/css/widgets.css',
-        '/css/media.css',
+        '/css/media.css'
     ]
 
 
 // Задачи выполняемые при старте.
 gulp.task('default', function () {
     gulp.start([
-        'htmlconfig',
-        'dev-server',
+        'templates',
         'stylus',
         'sprite',
-        'watch'
+        //'htmlconfig',
+        'watch',
+        'dev-server',
+
     ]);
 });
 
 // конфигурация html
 gulp.task('htmlconfig', function() {
-    gulp.src('./dev/index.html')
+    gulp.src('./dev/*.html')
         .pipe(htmlreplace({
             'cssConfig': cssArr,
             'jsConfig': jsArr
         },{keepBlockTags: true}))
-        .pipe(rename({
-            basename: "index",
-        }))
-        .pipe(gulp.dest('./dev'));
+        .pipe(gulp.dest('./dev/'));
 });
 // запуск сервера
 gulp.task('dev-server', function(){
@@ -63,18 +61,24 @@ gulp.task('dev-server', function(){
 // Включаем наблюдателей в рабочей директории
 gulp.task('watch', function () {
     //gulp.watch(['./dev/img/sprite/*.*'], ['sprite'])
-    watch(['./dev/**/*.*'], function (vinly) {
-        return vinly
+    watch(['./dev/**/*.*','!./dev/stylus/**/*.styl,', '!./dev/jade/*.jade,'], function (vinly) {
         gulp.start('reload');
         console.error('done reload')
     });
     watch(['./dev/stylus/**/*.styl'], function (vinly) {
-        return vinly
         gulp.start('stylus');
         console.error('done')
     });
     watch(['./dev/img/sprite/*.*'], function (vinly) {
+        gulp.start('sprite');
+        console.error('done-sprite')
+    });
+    watch(['./dev/jade/*.jade'], function (vinly) {
+        gulp.start('templates');
+        console.error('done templates');
         return vinly
+    });
+    watch(['./dev/img/sprite/*.*'], function (vinly) {
         gulp.start('sprite');
         console.error('done-sprite')
     });
@@ -88,8 +92,12 @@ gulp.task('watch', function () {
         gulp.src('./dev/**/*.*')
             .pipe(connect.reload());
     });
-
-
+// компиляция jade
+gulp.task('templates', function() {
+    gulp.src('./dev/jade/*.jade')
+        .pipe(jade())
+        .pipe(gulp.dest('./dev'));
+});
     // компиляция stylus
 gulp.task('stylus', function () {
     gulp.src(['./dev/stylus/*.styl', '!dev/stylus/mixin/*.styl'])
@@ -100,8 +108,7 @@ gulp.task('stylus', function () {
 
     // Создание спрайта
     gulp.task('sprite', function() {
-        var spriteData =
-            gulp.src('./dev/img/sprite/*.*') // путь, откуда берем картинки для спрайта
+            var spriteData = gulp.src('./dev/img/sprite/*.*') // путь, откуда берем картинки для спрайта
                 .pipe(spritesmith({
                     imgName: 'sprite.png',
                     cssName: 'sprite.styl',
@@ -120,13 +127,12 @@ gulp.task('stylus', function () {
 // Задача по сборке проекта в папку ./app.
 gulp.task('build', function () {
     gulp.start([
-        'build-html',
+        'copy-source',
+        'img-min',
         'build-css',
         'build-js',
-        'img-min',
         'app-server',
-        'copy-source',
-
+        'build-html'
     ]);
 });
 
@@ -144,9 +150,9 @@ gulp.task('build-html', function() {
 
 // сборка js
 gulp.task('build-js', function() {
-    var newJsArr = []
+    var newJsArr = [];
     for (var i = 0; i<jsArr.length; i++) {
-        newJsArr.push('./dev'+jsArr[i])
+        newJsArr.push('./dev'+jsArr[i]);
         console.log(newJsArr[i]);
     }
     gulp.src(newJsArr)
@@ -157,9 +163,9 @@ gulp.task('build-js', function() {
 
 // сборка css
 gulp.task('build-css', function() {
-    var newCssArr = []
+    var newCssArr = [];
     for (var i = 0; i<cssArr.length; i++) {
-        newCssArr.push('./dev'+cssArr[i])
+        newCssArr.push('./dev'+cssArr[i]);
         console.log(newCssArr[i]);
     }
     gulp.src(newCssArr)

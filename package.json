@@ -13,6 +13,7 @@
         "gulp-uglify": "latest",
         "gulp-watch": "latest",
         "gulp.spritesmith": "latest",
-        "gulp-autoprefixer": "latest"
+        "gulp-autoprefixer": "latest",
+        "gulp-jade": "latest"
     }
 }
